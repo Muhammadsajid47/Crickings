@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cricket Score Entry</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        input, button { margin: 10px; padding: 10px; font-size: 16px; }
+    </style>
+</head>
+<body>
+    <h2>Cricket Scoreboard Admin</h2>
+    
+    <input type="text" id="team1" placeholder="Team 1 Name">
+    <input type="text" id="team2" placeholder="Team 2 Name"><br>
+
+    <input type="number" id="runs" placeholder="Runs">
+    <input type="number" id="wickets" placeholder="Wickets">
+    <input type="text" id="overs" placeholder="Overs"><br>
+
+    <button onclick="updateScore()">Update Score</button>
+
+    <script>
+        function updateScore() {
+            let scoreData = {
+                team1: document.getElementById("team1").value,
+                team2: document.getElementById("team2").value,
+                runs: document.getElementById("runs").value,
+                wickets: document.getElementById("wickets").value,
+                overs: document.getElementById("overs").value
+            };
+
+            fetch("https://your-server.com/update-score", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(scoreData)
+            })
+            .then(response => response.json())
+            .then(data => alert("Score Updated!"));
+        }
+    </script>
+</body>
+</html>
