@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Scoreboard</title>
+    <style>
+        body { background: rgba(0, 0, 0, 0); color: white; font-family: Arial, sans-serif; }
+        #scoreboard {
+            position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.5); padding: 10px 20px; border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="scoreboard">Team A 0/0 (0.0) vs Team B</div>
+
+    <script>
+        function fetchScore() {
+            fetch("https://your-server.com/score.json")
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("scoreboard").innerText = 
+                    `${data.team1} ${data.runs}/${data.wickets} (${data.overs}) vs ${data.team2}`;
+            });
+        }
+        setInterval(fetchScore, 5000); // Refresh score every 5 seconds
+    </script>
+</body>
+</html>
